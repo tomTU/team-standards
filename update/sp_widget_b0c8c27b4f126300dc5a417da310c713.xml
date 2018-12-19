@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function( codingStandardService, $scope, $uibModal, spUtil ) {
+
+	var c = this;
+	var fixWidget = 'teamstandards-record-view';
+
+	c.standardService = codingStandardService.data;
+	c.loading = true;
+	c.updateSetName = c.data.updateSetName;
+
+	c.selectRow = function( offender ) {
+		var modalInstance = $uibModal.open({
+			animation: true,
+			templateUrl: 'modal-record-view.html',
+			controller: modalRecordViewController,
+			controllerAs: 'm',
+			size: 'lg',
+			resolve: {
+				offender: offender
+			}
+		});
+
+		modalInstance.result.then(function() {
+			c.server.get({
+				codingStandardSysID: codingStandardService.data.standards[ codingStandardService.data.selectedIndex ].sys_id,
+				index: codingStandardService.data.selectedIndex
+			}).then( updateStandardObj );
+		});
+	}
+
+	function updateStandardObj( response ) {
+		codingStandardService.updateOffenders( response.data.index, response.data.standardOffenders );
+	}
+
+	function modalRecordViewController( $uibModalInstance, $rootScope, offender ) {
+		var m = this;
+
+		m.loading = true;
+		m.updateSetName = c.updateSetName;
+
+		c.server.get({
+			'action': 'loadForm',
+			'sys_id': offender.sys_id,
+			'table': offender.table
+		}).then(function( response ) {
+			m.formWidget = response.data.formWidget;
+			m.loading = false;
+		});
+
+		m.cancel = function () {
+			$uibModalInstance.dismiss('cancel');
+		};
+
+		$rootScope.$on('sp.form.submitted', function() {
+			$uibModalInstance.close('Saved');
+		});
+	}
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>h2 {
+  font-weight: bold;
+}
+
+.standard-title {
+  text-align:center;
+  font-weight:bold;
+  font-size:18px;
+}
+
+
+.show-rows {
+  animation: fadein 2s;
+}
+
+@keyframes fadein {
+  from {
+    opacity:0;
+  }
+  to {
+    opacity:1;
+  }
+}
+@-moz-keyframes fadein { /* Firefox */
+  from {
+    opacity:0;
+  }
+  to {
+    opacity:1;
+  }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+  from {
+    opacity:0;
+  }
+  to {
+    opacity:1;
+  }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>teamstandards-underview</id>
+        <internal>false</internal>
+        <link/>
+        <name>TeamStandards Underview</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+	if ( input && input.action == 'loadForm' ) {
+
+		var formOptions = {
+			'sys_id': input.sys_id,
+			'table': input.table
+		};
+		data.formWidget = $sp.getWidget( "widget-form", formOptions );
+
+	} else if ( input && input.codingStandardSysID ) {
+
+		var tsHelper = new TeamStandards();
+		data.standardOffenders = tsHelper.checkStandard( input.codingStandardSysID );
+		data.index = input.index;
+
+	} else {
+
+		//Properties
+		data.columnHeadings = [ 'Name', 'Table', 'Updated By', 'Updated On' ];
+		data.updateSetName = _getUpdateSetName();
+
+	}
+
+	function _getUpdateSetName() {
+		// Get current users update set
+		var updateSetName = "";
+
+		var grUpdSet = new GlideRecord( 'sys_update_set' );
+		if ( grUpdSet.get( gs.getUser().getPreference( 'sys_update_set' ) ) ) {
+			updateSetName = grUpdSet.getDisplayValue();
+		}
+		return updateSetName;
+	}
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin_mh</sys_created_by>
+        <sys_created_on>2018-12-17 16:32:09</sys_created_on>
+        <sys_id>b0c8c27b4f126300dc5a417da310c713</sys_id>
+        <sys_mod_count>66</sys_mod_count>
+        <sys_name>TeamStandards Underview</sys_name>
+        <sys_package display_value="TeamStandards" source="x_38339_teamstand">26a1f9a24f562300dc5a417da310c7f6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TeamStandards">26a1f9a24f562300dc5a417da310c7f6</sys_scope>
+        <sys_update_name>sp_widget_b0c8c27b4f126300dc5a417da310c713</sys_update_name>
+        <sys_updated_by>admin_mh</sys_updated_by>
+        <sys_updated_on>2018-12-18 13:49:34</sys_updated_on>
+        <template><![CDATA[<div class="panel show-rows" ng-show="c.standardService.selectedIndex">
+  <div class="panel-heading standard-title">
+    {{c.standardService.standards[ c.standardService.selectedIndex ].name}}
+  </div>
+  <div class="panel-body table-responsive">
+    <table class="table table-hover table-striped tabel-condensed">
+      <thead>
+        <tr>
+          <th ng-repeat="heading in c.data.columnHeadings" ng-bind-html="heading"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="offender in c.standardService.standards[ c.standardService.selectedIndex ].offenders track by offender.sys_id"
+            ng-click="c.selectRow( offender )">
+          <td>{{offender.display_name}}</td>
+          <td>{{offender.table}}</td>
+          <td>{{offender.sys_updated_by}}</td>
+          <td>{{offender.sys_updated_on}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

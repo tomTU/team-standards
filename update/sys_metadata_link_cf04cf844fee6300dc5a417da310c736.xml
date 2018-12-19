@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>77684a364f126300dc5a417da310c730</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="x_38339_teamstand_coding_standard_condition">
+    <x_38339_teamstand_coding_standard_condition action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <coding_standard display_value="GlideRecord naming convention">896846f24f126300dc5a417da310c7e3</coding_standard>
+        <condition table="sys_script">scriptLIKEgr.^ORscriptLIKEga.<item endquery="false" field="script" goto="false" newquery="false" operator="LIKE" or="false" value="gr."/>
+            <item endquery="false" field="script" goto="false" newquery="false" operator="LIKE" or="true" value="ga."/>
+        </condition>
+        <display_name>GlideRecord naming convention - sys_script</display_name>
+        <script/>
+        <scripted>false</scripted>
+        <sys_created_by>admin_tc</sys_created_by>
+        <sys_created_on>2018-12-14 13:59:11</sys_created_on>
+        <sys_id>77684a364f126300dc5a417da310c730</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>admin_mh</sys_updated_by>
+        <sys_updated_on>2018-12-18 13:56:31</sys_updated_on>
+        <table>sys_script</table>
+    </x_38339_teamstand_coding_standard_condition>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>admin_mh</sys_created_by>
+        <sys_created_on>2018-12-18 15:29:40</sys_created_on>
+        <sys_id>cf04cf844fee6300dc5a417da310c736</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="TeamStandards" source="x_38339_teamstand">26a1f9a24f562300dc5a417da310c7f6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TeamStandards">26a1f9a24f562300dc5a417da310c7f6</sys_scope>
+        <sys_update_name>sys_metadata_link_cf04cf844fee6300dc5a417da310c736</sys_update_name>
+        <sys_updated_by>admin_mh</sys_updated_by>
+        <sys_updated_on>2018-12-18 15:29:40</sys_updated_on>
+        <tablename>x_38339_teamstand_coding_standard_condit</tablename>
+    </sys_metadata_link>
+</record_update>

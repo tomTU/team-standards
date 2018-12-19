@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Coding Standard" max_length="40" name="x_38339_teamstand_coding_standard" type="collection">
+        <element default="true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element attributes="edge_encryption_enabled=true" label="Description" max_length="80" name="description" type="string"/>
+        <element display="true" label="Name" max_length="40" name="name" type="string"/>
+    </element>
+</database>

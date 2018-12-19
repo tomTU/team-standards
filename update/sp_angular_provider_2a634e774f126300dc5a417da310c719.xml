@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_angular_provider">
+    <sp_angular_provider action="INSERT_OR_UPDATE">
+        <name>codingStandardService</name>
+        <script><![CDATA[function codingStandardService() {
+	
+	var data = this.data = {
+		"standards": [],
+		"selectedIndex": ""
+	};
+	
+	this.setStandards = function( newStandards ) {
+		data.standards = newStandards;
+	};
+	
+	this.updateOffenders = function( index, newOffenders ) {
+		data.standards[ index ].offenders = newOffenders;
+		data.standards[ index ].loaded = true;
+	};
+	
+	this.setSelectedIndex = function( index ) {
+		data.selectedIndex = index;
+	};
+	
+}]]></script>
+        <sys_class_name>sp_angular_provider</sys_class_name>
+        <sys_created_by>admin_tc</sys_created_by>
+        <sys_created_on>2018-12-17 16:14:27</sys_created_on>
+        <sys_id>2a634e774f126300dc5a417da310c719</sys_id>
+        <sys_mod_count>14</sys_mod_count>
+        <sys_name>codingStandardService</sys_name>
+        <sys_package display_value="TeamStandards" source="x_38339_teamstand">26a1f9a24f562300dc5a417da310c7f6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TeamStandards">26a1f9a24f562300dc5a417da310c7f6</sys_scope>
+        <sys_update_name>sp_angular_provider_2a634e774f126300dc5a417da310c719</sys_update_name>
+        <sys_updated_by>admin_tc</sys_updated_by>
+        <sys_updated_on>2018-12-18 13:08:36</sys_updated_on>
+        <type>service</type>
+    </sp_angular_provider>
+</record_update>

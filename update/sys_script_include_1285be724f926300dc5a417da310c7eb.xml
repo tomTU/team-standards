@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_38339_teamstand.TeamStandards</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Processor script for finding offending records against best practice conditions within the TeamStandards application</description>
+        <name>TeamStandards</name>
+        <script><![CDATA[var TeamStandards = Class.create();
+TeamStandards.prototype = {
+	initialize: function() {
+
+		// Predefined values
+		this.STANDARDS_TABLE = 'x_38339_teamstand_coding_standard';
+		this.STANDARD_CONDITIONS_TABLE = 'x_38339_teamstand_coding_standard_condition';
+
+		// "reign34tlngodrsjo9j49o99e8drdfgd"
+
+	},
+
+	/*_________________________________________________________________
+    * Description: Given a record Sys ID, build an object of all rows that match the related condition records
+    * Parameters: standardSysID [string] - Sys ID of the coding standard we are checking
+    * Returns: Array of record objects that match the conditions associated to the coding standard supplied
+    ________________________________________________________________*/
+	checkStandard: function( standardSysID ) {
+
+		var offenders = [];
+
+		// Query each related condition record to return a list of offending records
+		offenders = this._getAndCheckConditions( standardSysID );
+
+		// gs.info( "Found " + offenders.length + " offenders" );
+
+		return offenders;
+
+	},
+
+	/*_________________________________________________________________
+    * Description: Given a coding standard Sys ID, loop through each condition and concat the offenders into an array
+    * Parameters: standardSysID [string] - Sys ID of the coding standard we are checking
+    * Returns: Array of record objects that match the conditions associated to the coding standard supplied
+    ________________________________________________________________*/
+	_getAndCheckConditions: function( standardSysID ) {
+
+		var standardOffenders = [];
+
+		var grCond = new GlideRecord( this.STANDARD_CONDITIONS_TABLE );
+		grCond.addQuery( 'coding_standard', standardSysID );
+		grCond.addQuery( 'active', true );
+		grCond.query();
+
+		while ( grCond.next() ) {
+			// Get a list of the objects to return
+			var offTemp = this._findOffenders( grCond );
+			if ( offTemp ) {
+				standardOffenders = standardOffenders.concat( offTemp );
+			}
+		}
+
+		// gs.info( "Found " + grCond.getRowCount() + " condition records on coding standard " + standardSysID );
+
+		return standardOffenders;
+
+	},
+
+	/*_________________________________________________________________
+    * Description: Given a table and condition, find matching records
+    * Parameters: table [string] - Technical name of the table to search
+				  condition [string] - Encoded query string contained in the condition of the Condition record
+    * Returns: Array of record objects that match the condition on the given table
+    ________________________________________________________________*/
+	_findOffenders: function( grCond ) {
+
+		var individualOffenders = [];
+		var scriptedEval = grCond.scripted.toString();
+
+		var grTable = new GlideRecord( grCond.table.toString() );
+		if ( scriptedEval == 'false' ) {
+			grTable.addEncodedQuery( grCond.condition.toString() );
+		}
+		grTable.addQuery( 'sys_updated_by', gs.getUserName() );
+		grTable.query();
+
+		while ( grTable.next() ) {
+			if ( scriptedEval == 'true' ) {
+				var offensive = new GlideScopedEvaluator().evaluateScript(grCond, 'script', {'current': grTable});
+				if ( offensive )
+					individualOffenders.push( this._buildOffender( grTable ) );
+			} else {
+				individualOffenders.push( this._buildOffender( grTable ) );
+			}
+		}
+
+		return individualOffenders;
+
+	},
+
+	/*_________________________________________________________________
+    * Description: Create an object
+    * Parameters: grTable
+    * Returns:
+    ________________________________________________________________*/
+	_buildOffender: function( grTable ) {
+		return {
+			display_name: grTable.getDisplayValue(),
+			table: grTable.getTableName(),
+			sys_id: grTable.getUniqueValue(),
+			sys_updated_by: grTable.sys_updated_by.toString(),
+			sys_updated_on: grTable.sys_updated_on.toString()
+		};
+	},
+
+
+	type: 'TeamStandards'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin_tc</sys_created_by>
+        <sys_created_on>2018-12-14 17:20:32</sys_created_on>
+        <sys_id>1285be724f926300dc5a417da310c7eb</sys_id>
+        <sys_mod_count>25</sys_mod_count>
+        <sys_name>TeamStandards</sys_name>
+        <sys_package display_value="TeamStandards" source="x_38339_teamstand">26a1f9a24f562300dc5a417da310c7f6</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="TeamStandards">26a1f9a24f562300dc5a417da310c7f6</sys_scope>
+        <sys_update_name>sys_script_include_1285be724f926300dc5a417da310c7eb</sys_update_name>
+        <sys_updated_by>admin_tc</sys_updated_by>
+        <sys_updated_on>2018-12-18 15:19:26</sys_updated_on>
+    </sys_script_include>
+</record_update>

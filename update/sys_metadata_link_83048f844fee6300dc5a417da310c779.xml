@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>560902764f126300dc5a417da310c7e9</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="x_38339_teamstand_coding_standard_condition">
+    <x_38339_teamstand_coding_standard_condition action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <coding_standard display_value="Client side server call">540906364f126300dc5a417da310c7fc</coding_standard>
+        <condition table="sys_script_client">scriptLIKEnew gliderecord^ORscriptLIKEnew glideaggregate^ORscriptLIKEgetreference<item endquery="false" field="script" goto="false" newquery="false" operator="LIKE" or="false" value="new gliderecord"/>
+            <item endquery="false" field="script" goto="false" newquery="false" operator="LIKE" or="true" value="new glideaggregate"/>
+            <item endquery="false" field="script" goto="false" newquery="false" operator="LIKE" or="true" value="getreference"/>
+        </condition>
+        <display_name>Client side server call - sys_script_client</display_name>
+        <script/>
+        <scripted>false</scripted>
+        <sys_created_by>admin_tc</sys_created_by>
+        <sys_created_on>2018-12-14 14:00:16</sys_created_on>
+        <sys_id>560902764f126300dc5a417da310c7e9</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_updated_by>admin_mh</sys_updated_by>
+        <sys_updated_on>2018-12-18 13:52:51</sys_updated_on>
+        <table>sys_script_client</table>
+    </x_38339_teamstand_coding_standard_condition>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>admin_mh</sys_created_by>
+        <sys_created_on>2018-12-18 15:29:40</sys_created_on>
+        <sys_id>83048f844fee6300dc5a417da310c779</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="TeamStandards" source="x_38339_teamstand">26a1f9a24f562300dc5a417da310c7f6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TeamStandards">26a1f9a24f562300dc5a417da310c7f6</sys_scope>
+        <sys_update_name>sys_metadata_link_83048f844fee6300dc5a417da310c779</sys_update_name>
+        <sys_updated_by>admin_mh</sys_updated_by>
+        <sys_updated_on>2018-12-18 15:29:40</sys_updated_on>
+        <tablename>x_38339_teamstand_coding_standard_condit</tablename>
+    </sys_metadata_link>
+</record_update>

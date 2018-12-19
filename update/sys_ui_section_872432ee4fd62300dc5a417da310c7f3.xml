@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_section caption="" section_id="872432ee4fd62300dc5a417da310c7f3" sys_domain="global" table="x_38339_teamstand_coding_standard_condition" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>display_name</element>
+            <position>0</position>
+            <sys_created_by>admin_tc</sys_created_by>
+            <sys_created_on>2018-12-14 15:06:02</sys_created_on>
+            <sys_id>4248dabe4f126300dc5a417da310c798</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_38339_teamstand_coding_standard_condition" sys_domain="global" view="Default view">872432ee4fd62300dc5a417da310c7f3</sys_ui_section>
+            <sys_updated_by>admin_tc</sys_updated_by>
+            <sys_updated_on>2018-12-14 15:06:02</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.begin_split</element>
+            <position>1</position>
+            <sys_created_by>admin_tc</sys_created_by>
+            <sys_created_on>2018-12-14 15:06:02</sys_created_on>
+            <sys_id>c248dabe4f126300dc5a417da310c798</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_38339_teamstand_coding_standard_condition" sys_domain="global" view="Default view">872432ee4fd62300dc5a417da310c7f3</sys_ui_section>
+            <sys_updated_by>admin_tc</sys_updated_by>
+            <sys_updated_on>2018-12-14 15:06:02</sys_updated_on>
+            <sys_user/>
+            <type>.begin_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>table</element>
+            <position>2</position>
+            <sys_created_by>admin_tc</sys_created_by>
+            <sys_created_on>2018-12-14 15:06:02</sys_created_on>
+            <sys_id>4648dabe4f126300dc5a417da310c798</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_38339_teamstand_coding_standard_condition" sys_domain="global" view="Default view">872432ee4fd62300dc5a417da310c7f3</sys_ui_section>
+            <sys_updated_by>admin_tc</sys_updated_by>
+            <sys_updated_on>2018-12-14 15:06:02</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>active</element>
+            <position>3</position>
+            <sys_created_by>admin_tc</sys_created_by>
+            <sys_created_on>2018-12-14 15:06:02</sys_created_on>
+            <sys_id>c648dabe4f126300dc5a417da310c798</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_38339_teamstand_coding_standard_condition" sys_domain="global" view="Default view">872432ee4fd62300dc5a417da310c7f3</sys_ui_section>
+            <sys_updated_by>admin_tc</sys_updated_by>
+            <sys_updated_on>2018-12-14 15:06:02</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>4</position>
+            <sys_created_by>admin_tc</sys_created_by>
+            <sys_created_on>2018-12-14 15:06:02</sys_created_on>
+            <sys_id>4a48dabe4f126300dc5a417da310c798</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_38339_teamstand_coding_standard_condition" sys_domain="global" view="Default view">872432ee4fd62300dc5a417da310c7f3</sys_ui_section>
+            <sys_updated_by>admin_tc</sys_updated_by>
+            <sys_updated_on>2018-12-14 15:06:02</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>coding_standard</element>
+            <position>5</position>
+            <sys_created_by>admin_tc</sys_created_by>
+            <sys_created_on>2018-12-14 15:06:02</sys_created_on>
+            <sys_id>ca48dabe4f126300dc5a417da310c798</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_38339_teamstand_coding_standard_condition" sys_domain="global" view="Default view">872432ee4fd62300dc5a417da310c7f3</sys_ui_section>
+            <sys_updated_by>admin_tc</sys_updated_by>
+            <sys_updated_on>2018-12-14 15:06:02</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>scripted</element>
+            <position>6</position>
+            <sys_created_by>admin_tc</sys_created_by>
+            <sys_created_on>2018-12-14 15:06:02</sys_created_on>
+            <sys_id>4e48dabe4f126300dc5a417da310c798</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_38339_teamstand_coding_standard_condition" sys_domain="global" view="Default view">872432ee4fd62300dc5a417da310c7f3</sys_ui_section>
+            <sys_updated_by>admin_tc</sys_updated_by>
+            <sys_updated_on>2018-12-14 15:06:02</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.end_split</element>
+            <position>7</position>
+            <sys_created_by>admin_tc</sys_created_by>
+            <sys_created_on>2018-12-14 15:06:02</sys_created_on>
+            <sys_id>ce48dabe4f126300dc5a417da310c798</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_38339_teamstand_coding_standard_condition" sys_domain="global" view="Default view">872432ee4fd62300dc5a417da310c7f3</sys_ui_section>
+            <sys_updated_by>admin_tc</sys_updated_by>
+            <sys_updated_on>2018-12-14 15:06:02</sys_updated_on>
+            <sys_user/>
+            <type>.end_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>condition</element>
+            <position>8</position>
+            <sys_created_by>admin_tc</sys_created_by>
+            <sys_created_on>2018-12-14 15:06:02</sys_created_on>
+            <sys_id>4248dabe4f126300dc5a417da310c799</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_38339_teamstand_coding_standard_condition" sys_domain="global" view="Default view">872432ee4fd62300dc5a417da310c7f3</sys_ui_section>
+            <sys_updated_by>admin_tc</sys_updated_by>
+            <sys_updated_on>2018-12-14 15:06:02</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>script</element>
+            <position>9</position>
+            <sys_created_by>admin_tc</sys_created_by>
+            <sys_created_on>2018-12-14 15:06:02</sys_created_on>
+            <sys_id>c248dabe4f126300dc5a417da310c799</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_38339_teamstand_coding_standard_condition" sys_domain="global" view="Default view">872432ee4fd62300dc5a417da310c7f3</sys_ui_section>
+            <sys_updated_by>admin_tc</sys_updated_by>
+            <sys_updated_on>2018-12-14 15:06:02</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_38339_teamstand_coding_standard_condition</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>admin_tc</sys_created_by>
+            <sys_created_on>2018-12-13 22:29:25</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>872432ee4fd62300dc5a417da310c7f3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_38339_teamstand_coding_standard_condition</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="TeamStandards" source="x_38339_teamstand">26a1f9a24f562300dc5a417da310c7f6</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="TeamStandards">26a1f9a24f562300dc5a417da310c7f6</sys_scope>
+            <sys_update_name>sys_ui_section_872432ee4fd62300dc5a417da310c7f3</sys_update_name>
+            <sys_updated_by>admin_tc</sys_updated_by>
+            <sys_updated_on>2018-12-13 22:29:25</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

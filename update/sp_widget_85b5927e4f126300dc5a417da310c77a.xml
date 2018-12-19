@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function overviewController( codingStandardService ) {
+
+	var c = this;
+
+	c.codingStandardService = codingStandardService;
+
+	//Initialize service as empty
+	c.codingStandardService.setStandards( [] );
+	c.codingStandardService.setSelectedIndex( '' );
+
+	c.codingStandardService.setStandards( c.data.standards );
+	c.standards = c.codingStandardService.data.standards;
+
+	// onLoad: start looping through the list of best practices to pull in the data
+	c.standards.forEach(function( elem, i ) {
+		c.server.get({
+			codingStandardSysID: elem.sys_id,
+			index: i
+		}).then( updateStandardObj );
+	});
+
+	function updateStandardObj( response ) {
+		c.codingStandardService.updateOffenders( response.data.index, response.data.standardOffenders );
+	}
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.coding-standards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.coding-standard-excellent {
+  color: $brand-success;
+  border: 2px solid $brand-success;
+  cursor: inherit;
+}
+
+.coding-standard-offenders {
+  color: $brand-danger;
+  border: 2px solid $brand-danger;
+}
+
+.loading-image {
+  background-image: url('/teamstandard-spinner.gif')
+}
+
+.coding-standard-details {
+  position: absolute;
+  bottom: -100%;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  background-color: #fff;
+  @include transition(all 0.3s ease-in-out);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    width: 80%;
+    margin: 0;
+  }
+}
+
+.number-container {
+  width:50px;
+  text-align:center;
+  height:50px;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 50px;
+}
+
+.panel {
+  .panel-body {
+    position: relative;
+    overflow: hidden;
+    display: flex; 
+    align-items: center;
+    height: 100px;
+    width: 300px;
+    flex-direction: column-reverse;
+  }
+
+  &amp;:hover .coding-standard-details {
+    bottom: 0;
+  }
+}
+
+.selected {
+  .number-container {
+    width:50px;
+    text-align:center;
+    height:50px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 50px;
+  }
+  .panel-body {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: auto;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+  .coding-standard-details {
+    left: 0;
+    text-align: start;
+  }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>teamstandards-overview</id>
+        <internal>false</internal>
+        <link/>
+        <name>TeamStandards Overview</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+	if ( input && input.codingStandardSysID ) {
+		
+		var tsHelper = new TeamStandards();
+		data.standardOffenders = tsHelper.checkStandard( input.codingStandardSysID );
+		data.index = input.index;
+		// console.log("Offenders = " + JSON.stringify(data.standardOffenders))
+		
+	} else if ( !input || input.refresh ) {
+		
+		var standards = [];
+
+		var grStandards = new GlideRecord( 'x_38339_teamstand_coding_standard' );
+		grStandards.addQuery( 'active', true );
+		grStandards.query();
+
+		while( grStandards.next() ) {
+			var standard = {};
+			$sp.getRecordDisplayValues( standard, grStandards, 'name,description,sys_id' );
+			standard.loaded = false;
+			standards.push( standard );
+		}
+
+		data.standards = standards;
+		
+	}
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin_tc</sys_created_by>
+        <sys_created_on>2018-12-14 14:54:46</sys_created_on>
+        <sys_id>85b5927e4f126300dc5a417da310c77a</sys_id>
+        <sys_mod_count>129</sys_mod_count>
+        <sys_name>TeamStandards Overview</sys_name>
+        <sys_package display_value="TeamStandards" source="x_38339_teamstand">26a1f9a24f562300dc5a417da310c7f6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TeamStandards">26a1f9a24f562300dc5a417da310c7f6</sys_scope>
+        <sys_update_name>sp_widget_85b5927e4f126300dc5a417da310c77a</sys_update_name>
+        <sys_updated_by>admin_tc</sys_updated_by>
+        <sys_updated_on>2018-12-18 14:36:56</sys_updated_on>
+        <template><![CDATA[<div class="coding-standards-container">
+	<standard ng-repeat="standard in c.standards track by $index"
+            input-data="standard"
+            template="standard-coding-template.html"
+            index="{{$index}}"
+            selected="c.codingStandardService.data.selectedIndex"
+            my-click="c.codingStandardService.setSelectedIndex">
+  </standard>
+</div>]]></template>
+    </sp_widget>
+</record_update>

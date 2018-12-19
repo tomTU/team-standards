@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_ng_template">
+    <sp_ng_template action="INSERT_OR_UPDATE">
+        <id>standard-coding-template.html</id>
+        <sp_widget display_value="TeamStandards Overview">85b5927e4f126300dc5a417da310c77a</sp_widget>
+        <sys_class_name>sp_ng_template</sys_class_name>
+        <sys_created_by>admin_tc</sys_created_by>
+        <sys_created_on>2018-12-14 16:57:13</sys_created_on>
+        <sys_id>82a1f2fe4f526300dc5a417da310c762</sys_id>
+        <sys_mod_count>102</sys_mod_count>
+        <sys_name>standard-coding-template.html</sys_name>
+        <sys_package display_value="TeamStandards" source="x_38339_teamstand">26a1f9a24f562300dc5a417da310c7f6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TeamStandards">26a1f9a24f562300dc5a417da310c7f6</sys_scope>
+        <sys_update_name>sp_ng_template_82a1f2fe4f526300dc5a417da310c762</sys_update_name>
+        <sys_updated_by>admin_tc</sys_updated_by>
+        <sys_updated_on>2018-12-18 14:34:44</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-default" data-toggle="tooltip" data-placement="top" title="There {{standard.offenders.length > 0 ? standard.offenders.length > 1 ? 'are ' + standard.offenders.length : 'is 1' : 'are no' }} offending record(s)"
+     ng-class="{'coding-standard-excellent': standard.offenders.length == 0, 'coding-standard-offenders': standard.offenders.length > 0, 'selected': selected != '' }"
+     ng-click="standard.offenders.length > 0 && myClick( index )">
+  <div class="panel-body">
+    <div>{{::standard.name}}</div>
+    <div class="number-container"
+         ng-class="{'loading-image': !standard.loaded, 'ticked-image': standard.loaded && standard.offenders.length == 0}">
+      <span ng-show="standard.loaded && standard.offenders.length == 0"><i class="fas fa-check-double"></i></span>
+      <span ng-show="standard.loaded && standard.offenders.length > 0">{{standard.offenders.length}}</span>
+    </div>
+    <div class="coding-standard-details">
+      <p>
+        {{::standard.description}}
+        <span ng-if="!standard.description">${No description}</span>
+      </p>
+    </div>
+  </div>
+</div>]]></template>
+    </sp_ng_template>
+</record_update>

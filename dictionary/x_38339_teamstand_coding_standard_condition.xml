@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Coding Standard Condition" max_length="40" name="x_38339_teamstand_coding_standard_condition" type="collection">
+        <element label="Active" max_length="40" name="active" type="boolean"/>
+        <element label="Coding standard" max_length="32" name="coding_standard" reference="x_38339_teamstand_coding_standard" type="reference"/>
+        <element attributes="condition_builder=v2,show_condition_count=true" dependent="table" dependent_on_field="table" label="Condition" max_length="4000" name="condition" type="conditions" use_dependent_field="true"/>
+        <element display="true" label="Display name" max_length="100" name="display_name" read_only="true" type="string"/>
+        <element default="/*&#13;&#10;*&#13;&#10;* This script will run over all GlideRecords that the user has updated on the given table.&#13;&#10;* It must return a boolean true/false and has use of 'current'&#13;&#10;*&#13;&#10;* E.G&#13;&#10;*&#13;&#10;* (function(){&#13;&#10;* &#9;&#13;&#10;* &#9;var regex = new RegExp(/('|\&quot;)[a-zA-Z0-9]{32}('|\&quot;)/);&#13;&#10;* &#13;&#10;* &#9;return regex.test( current.script );&#13;&#10;* &#9;&#13;&#10;* })();&#13;&#10;*/" label="Script" max_length="8000" name="script" type="script"/>
+        <element label="Scripted" max_length="40" name="scripted" type="boolean"/>
+        <element label="Table" max_length="32" name="table" type="table_name"/>
+        <index name="index">
+            <element name="coding_standard"/>
+        </index>
+        <index name="index2">
+            <element name="table"/>
+        </index>
+    </element>
+</database>

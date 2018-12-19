@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_ng_template">
+    <sp_ng_template action="INSERT_OR_UPDATE">
+        <id>modal-record-view.html</id>
+        <sp_widget display_value="TeamStandards Underview">b0c8c27b4f126300dc5a417da310c713</sp_widget>
+        <sys_class_name>sp_ng_template</sys_class_name>
+        <sys_created_by>admin_tc</sys_created_by>
+        <sys_created_on>2018-12-18 11:46:29</sys_created_on>
+        <sys_id>52e0924c4f2e6300dc5a417da310c76c</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>modal-record-view.html</sys_name>
+        <sys_package display_value="TeamStandards" source="x_38339_teamstand">26a1f9a24f562300dc5a417da310c7f6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TeamStandards">26a1f9a24f562300dc5a417da310c7f6</sys_scope>
+        <sys_update_name>sp_ng_template_52e0924c4f2e6300dc5a417da310c76c</sys_update_name>
+        <sys_updated_by>admin_tc</sys_updated_by>
+        <sys_updated_on>2018-12-18 13:30:44</sys_updated_on>
+        <template><![CDATA[<div>
+  
+  <div class="modal-header">
+    <h3 class="modal-title">${Record view}</h3>
+  </div>
+  
+  <div class="modal-body">
+    <!-- Current Update Set --> 
+    <p class="alert alert-info"
+       
+       ng-class="{'alert-danger': m.updateSetName == 'Default'}">
+      ${You are currently in Update Set}: '{{m.updateSetName}}'
+    </p>
+    <!-- Loading GIF -->
+    <div style="text-align: center; margin-top: 40px;"
+         ng-if="m.loading">
+      <img src="/teamstandard-spinner.gif"/>
+    </div>
+    <!-- Form contents -->
+    <div ng-if="!m.loading">
+      <p ng-if="!m.formWidget">${Error - No Form found}</p>
+      <sp-widget widget="m.formWidget"></sp-widget>
+    </div>
+  </div>
+  
+  <div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="m.cancel()">Cancel</button>
+  </div>
+</div>]]></template>
+    </sp_ng_template>
+</record_update>

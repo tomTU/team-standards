@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>e2d5ba224f1a2300dc5a417da310c712</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="x_38339_teamstand_coding_standard">
+    <x_38339_teamstand_coding_standard action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <description/>
+        <name>Record naming convention</name>
+        <sys_created_by>admin_tc</sys_created_by>
+        <sys_created_on>2018-12-13 22:37:02</sys_created_on>
+        <sys_id>e2d5ba224f1a2300dc5a417da310c712</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_updated_by>admin_tc</sys_updated_by>
+        <sys_updated_on>2018-12-14 15:10:52</sys_updated_on>
+    </x_38339_teamstand_coding_standard>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>admin_mh</sys_created_by>
+        <sys_created_on>2018-12-18 15:29:27</sys_created_on>
+        <sys_id>fff38f844fee6300dc5a417da310c725</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Record naming convention</sys_name>
+        <sys_package display_value="TeamStandards" source="x_38339_teamstand">26a1f9a24f562300dc5a417da310c7f6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TeamStandards">26a1f9a24f562300dc5a417da310c7f6</sys_scope>
+        <sys_update_name>sys_metadata_link_fff38f844fee6300dc5a417da310c725</sys_update_name>
+        <sys_updated_by>admin_mh</sys_updated_by>
+        <sys_updated_on>2018-12-18 15:29:27</sys_updated_on>
+        <tablename>x_38339_teamstand_coding_standard</tablename>
+    </sys_metadata_link>
+</record_update>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_embedded_help_role">
+    <sys_embedded_help_role action="INSERT_OR_UPDATE">
+        <order>1000</order>
+        <role display_value="x_38339_teamstand.coding_standard_condition_user" name="x_38339_teamstand.coding_standard_condition_user">5b1476ae4fd62300dc5a417da310c799</role>
+        <sys_class_name>sys_embedded_help_role</sys_class_name>
+        <sys_created_by>admin_tc</sys_created_by>
+        <sys_created_on>2018-12-13 22:29:09</sys_created_on>
+        <sys_id>d71476ae4fd62300dc5a417da310c79b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>5b1476ae4fd62300dc5a417da310c799</sys_name>
+        <sys_package display_value="TeamStandards" source="x_38339_teamstand">26a1f9a24f562300dc5a417da310c7f6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TeamStandards">26a1f9a24f562300dc5a417da310c7f6</sys_scope>
+        <sys_update_name>sys_embedded_help_role_d71476ae4fd62300dc5a417da310c79b</sys_update_name>
+        <sys_updated_by>admin_tc</sys_updated_by>
+        <sys_updated_on>2018-12-13 22:29:09</sys_updated_on>
+    </sys_embedded_help_role>
+</record_update>
