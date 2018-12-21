@@ -2,11 +2,16 @@
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
         <client_script><![CDATA[function( codingStandardService ) {
+
+	var c = this;
+
+	var service = codingStandardService;
+	c.serviceData = service.data;
 	
-  var c = this;
-	
-	c.codingStandardService = codingStandardService;
-	
+	//Initialize service as empty
+	service.setStandards( [] );
+	service.setSelectedIndex( '' );
+
 }]]></client_script>
         <controller_as>c</controller_as>
         <css/>
@@ -25,8 +30,9 @@
         <roles/>
         <script><![CDATA[(function() {
 	
-	data.overviewWidget = $sp.getWidget('teamstandards-overview');
-	data.underviewWidget = $sp.getWidget('teamstandards-underview');
+	data.overviewWidget = $sp.getWidget( 'teamstandards-overview' );
+	data.underviewWidget = $sp.getWidget( 'teamstandards-underview' );
+	data.headerWidget = $sp.getWidget( 'teamstandards-config-header' );
 
 })();]]></script>
         <servicenow>false</servicenow>
@@ -34,22 +40,25 @@
         <sys_created_by>admin_tc</sys_created_by>
         <sys_created_on>2018-12-18 13:48:45</sys_created_on>
         <sys_id>fcfc6ac04fae6300dc5a417da310c714</sys_id>
-        <sys_mod_count>12</sys_mod_count>
+        <sys_mod_count>17</sys_mod_count>
         <sys_name>TeamStandards Parent Widget</sys_name>
         <sys_package display_value="TeamStandards" source="x_38339_teamstand">26a1f9a24f562300dc5a417da310c7f6</sys_package>
         <sys_policy/>
         <sys_scope display_value="TeamStandards">26a1f9a24f562300dc5a417da310c7f6</sys_scope>
         <sys_update_name>sp_widget_fcfc6ac04fae6300dc5a417da310c714</sys_update_name>
         <sys_updated_by>admin_tc</sys_updated_by>
-        <sys_updated_on>2018-12-18 14:10:54</sys_updated_on>
+        <sys_updated_on>2018-12-20 12:53:17</sys_updated_on>
         <template><![CDATA[<div>
+  <div>
+    <sp-widget widget="::data.headerWidget"></sp-widget>
+  </div>
 
-  <div ng-class="{'col-md-3': c.codingStandardService.data.selectedIndex, 'col-md-12': !c.codingStandardService.data.selectedIndex}">
-    <sp-widget widget="data.overviewWidget"></sp-widget>
+  <div ng-class="{'col-md-3': c.serviceData.display == 'details', 'col-md-12': c.serviceData.display == 'overview'}">
+    <sp-widget widget="::data.overviewWidget"></sp-widget>
   </div>
   
   <div class="col-md-9">
-    <sp-widget widget="data.underviewWidget"></sp-widget>
+    <sp-widget widget="::data.underviewWidget"></sp-widget>
   </div>
   
 </div>]]></template>

@@ -9,6 +9,7 @@
 	c.standardService = codingStandardService.data;
 	c.loading = true;
 	c.updateSetName = c.data.updateSetName;
+	c.applicationName = c.data.applicationName;
 
 	c.selectRow = function( offender ) {
 		var modalInstance = $uibModal.open({
@@ -39,6 +40,7 @@
 
 		m.loading = true;
 		m.updateSetName = c.updateSetName;
+		m.applicationName = c.applicationName;
 
 		c.server.get({
 			'action': 'loadForm',
@@ -70,9 +72,16 @@
   font-size:18px;
 }
 
+.panel {
+  opacity: 0; // Use opacity and visibility because animation out when supposed to hide is annoying
+  visibility: hidden;
+  @include transition(opacity 1s);
+}
 
 .show-rows {
-  animation: fadein 2s;
+  visibility: visible;
+  opacity: 1;
+  // animation: fadein .5s;
 }
 
 @keyframes fadein {
@@ -104,7 +113,7 @@
         <description/>
         <docs/>
         <field_list/>
-        <has_preview>true</has_preview>
+        <has_preview>false</has_preview>
         <id>teamstandards-underview</id>
         <internal>false</internal>
         <link/>
@@ -133,18 +142,32 @@
 		//Properties
 		data.columnHeadings = [ 'Name', 'Table', 'Updated By', 'Updated On' ];
 		data.updateSetName = _getUpdateSetName();
+		data.applicationName = _getApplicationName();
 
 	}
 
 	function _getUpdateSetName() {
 		// Get current users update set
 		var updateSetName = "";
+		var userPrefUpdateSet = gs.getUser().getPreference( 'sys_update_set' );
 
 		var grUpdSet = new GlideRecord( 'sys_update_set' );
-		if ( grUpdSet.get( gs.getUser().getPreference( 'sys_update_set' ) ) ) {
+		if ( userPrefUpdateSet && grUpdSet.get( userPrefUpdateSet ) ) {
 			updateSetName = grUpdSet.getDisplayValue();
 		}
 		return updateSetName;
+	}
+	
+	function _getApplicationName() {
+		// Get current users update set
+		var appName = "";
+		var userPrefApp = gs.getUser().getPreference( 'apps.current_app' );
+
+		var grApp = new GlideRecord( 'sys_app' );
+		if ( userPrefApp && grApp.get( userPrefApp ) ) {
+			appName = grApp.getDisplayValue();
+		}
+		return appName;
 	}
 
 })();]]></script>
@@ -153,15 +176,17 @@
         <sys_created_by>admin_mh</sys_created_by>
         <sys_created_on>2018-12-17 16:32:09</sys_created_on>
         <sys_id>b0c8c27b4f126300dc5a417da310c713</sys_id>
-        <sys_mod_count>66</sys_mod_count>
+        <sys_mod_count>78</sys_mod_count>
         <sys_name>TeamStandards Underview</sys_name>
         <sys_package display_value="TeamStandards" source="x_38339_teamstand">26a1f9a24f562300dc5a417da310c7f6</sys_package>
         <sys_policy/>
         <sys_scope display_value="TeamStandards">26a1f9a24f562300dc5a417da310c7f6</sys_scope>
         <sys_update_name>sp_widget_b0c8c27b4f126300dc5a417da310c713</sys_update_name>
-        <sys_updated_by>admin_mh</sys_updated_by>
-        <sys_updated_on>2018-12-18 13:49:34</sys_updated_on>
-        <template><![CDATA[<div class="panel show-rows" ng-show="c.standardService.selectedIndex">
+        <sys_updated_by>admin_tc</sys_updated_by>
+        <sys_updated_on>2018-12-21 17:01:15</sys_updated_on>
+        <template><![CDATA[<div class="panel"
+     ng-class="{'show-rows': c.standardService.display == 'details'}"
+     ng-show="c.standardService.display == 'details'">
   <div class="panel-heading standard-title">
     {{c.standardService.standards[ c.standardService.selectedIndex ].name}}
   </div>

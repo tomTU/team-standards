@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function configHeader( codingStandardService, $uibModal ) {
+
+	var c = this;
+
+	var service = c.service = codingStandardService;
+	var serviceData = c.serviceData = codingStandardService.data;
+	c.modalData = {
+		searchType: { display: "Specific User", value: 'user' },
+		user: c.data.user,
+		users: {},
+		dateRange: { startDate: "", endDate: "" }
+	}
+
+	service.setStandards( c.data.standards );
+
+	// Onload we loop through all active coding standards to evaluate the conditions
+	updateAllStandards();
+
+	// Loop through the list of best practices to pull in the data
+	function updateAllStandards() {
+		serviceData.standards.forEach(function( elem, i ) {
+			elem.loaded = false;
+			c.server.get({
+				action: "get offenders",
+				codingStandardSysID: elem.sys_id,
+				index: i,
+				searchParams: c.modalData
+			}).then( updateStandardObj );
+		});
+	}
+
+	function updateStandardObj( response ) {
+		service.updateOffenders( response.data.index, response.data.standardOffenders );
+	}
+
+	c.openConfig = function() {
+		var modalInstance = $uibModal.open({
+			animation: true,
+			ariaLabelledBy: 'modal-title',
+			ariaDescribedBy: 'modal-body',
+			templateUrl: 'team-standards-options-modal.html',
+			controller: configController,
+			controllerAs: 'm',
+			resolve: {
+				modalData: c.modalData
+			}
+		});
+
+		modalInstance.result.then(function ( returnData ) {
+			// This function runs on click of 'OK'
+			c.modalData = returnData;
+			updateAllStandards();
+		});
+
+	}
+
+	function configController( $uibModalInstance, modalData ) {
+		var m = this;
+
+		m.searchTypeOptions = [
+			{display: "Specific User", value: 'user'},
+			{display: "Multiple Users", value: 'multipleUsers'}
+			//{display: "Everyone", value: "all"} Dont have a good way of calculating this right now
+		];
+		// Re-initialise input data object, so that if cancelled out it is not stored to c
+		m.returnData = JSON.parse( JSON.stringify ( modalData ) );
+		// After initialising, dates need to be changed back into Date() format
+		m.returnData.dateRange = {
+			startDate: m.returnData.dateRange.startDate ? new Date( m.returnData.dateRange.startDate ) : "",
+			endDate: m.returnData.dateRange.endDate ? new Date( m.returnData.dateRange.endDate ) : ""
+		}
+		m.useDateRange = m.returnData.dateRange.startDate != "" || m.returnData.dateRange.endDate != "";
+		
+		m.ok = function () {
+			// Need to clear the date values if they are not being used
+			if ( !m.useDateRange ) {
+				m.returnData.dateRange = { startDate: "", endDate: "" };
+			}
+			$uibModalInstance.close( m.returnData );
+		};
+
+		m.cancel = function () {
+			$uibModalInstance.dismiss('cancel');
+		};
+	}
+
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.header-container {
+  padding: 10px;
+  margin: 0 0 10px 0;
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(0,0,0,.5);
+  border-radius: 25px;
+}
+
+.config-icon, .header-options {
+  color: #000;
+  font-size: 20px;
+}
+
+.config-icon {
+  float: left;
+}
+
+.header-options {
+  text-align: center;
+}
+
+.header-menu-item {
+  color: #949494;
+
+  &amp;:hover {
+    cursor: pointer;
+  }
+}
+
+.active {
+  color: #000;
+  text-decoration: underline;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>teamstandards-config-header</id>
+        <internal>false</internal>
+        <link/>
+        <name>TeamStandards Config Header</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+	if ( input && input.action == "get offenders" ) {
+		
+		var tsHelper = new TeamStandards();
+		data.standardOffenders = tsHelper.checkStandard( input.codingStandardSysID, input.searchParams );
+		data.index = input.index;
+
+	} else {
+
+		var standards = [];
+
+		data.user = {
+			"displayValue": gs.getUserDisplayName(),
+			"value": gs.getUserName(),
+			"name": 'user'
+		}
+
+		var grStandards = new GlideRecord( 'x_38339_teamstand_coding_standard' );
+		grStandards.addQuery( 'active', true );
+		grStandards.query();
+
+		while( grStandards.next() ) {
+			var standard = {};
+			$sp.getRecordDisplayValues( standard, grStandards, 'name,description,sys_id' );
+			standard.loaded = false;
+			standards.push( standard );
+		}
+
+		data.standards = standards;
+
+	}
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin_tc</sys_created_by>
+        <sys_created_on>2018-12-19 21:53:33</sys_created_on>
+        <sys_id>8c85e1644fe2e300dc5a417da310c70b</sys_id>
+        <sys_mod_count>137</sys_mod_count>
+        <sys_name>TeamStandards Config Header</sys_name>
+        <sys_package display_value="TeamStandards" source="x_38339_teamstand">26a1f9a24f562300dc5a417da310c7f6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TeamStandards">26a1f9a24f562300dc5a417da310c7f6</sys_scope>
+        <sys_update_name>sp_widget_8c85e1644fe2e300dc5a417da310c70b</sys_update_name>
+        <sys_updated_by>admin_tc</sys_updated_by>
+        <sys_updated_on>2018-12-21 16:36:01</sys_updated_on>
+        <template><![CDATA[<div class="header-container">
+  <div class="config-icon" title="Options"
+       ng-click="c.openConfig()">
+    <i class="fas fa-cogs"></i>
+  </div>
+  <div class="header-options">
+    <span class="header-menu-item"
+          ng-class="{'active': c.serviceData.display == 'overview'}"
+          ng-click="c.serviceData.display != 'overview' &&
+                    c.service.changeDisplay( 'overview' )">${Overview}</span>
+    <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+    <span class="header-menu-item"
+          ng-class="{'active': c.serviceData.display == 'details'}"
+          ng-click="c.serviceData.display != 'details' &&
+                    c.service.changeDisplay( 'details' )">${Details}</span>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

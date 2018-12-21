@@ -15,7 +15,7 @@ TeamStandards.prototype = {
 		this.STANDARDS_TABLE = 'x_38339_teamstand_coding_standard';
 		this.STANDARD_CONDITIONS_TABLE = 'x_38339_teamstand_coding_standard_condition';
 
-		// "reign34tlngodrsjo9j49o99e8drdfgd"
+		this.queryParams = "";
 
 	},
 
@@ -24,14 +24,16 @@ TeamStandards.prototype = {
     * Parameters: standardSysID [string] - Sys ID of the coding standard we are checking
     * Returns: Array of record objects that match the conditions associated to the coding standard supplied
     ________________________________________________________________*/
-	checkStandard: function( standardSysID ) {
+	checkStandard: function( standardSysID, queryParams ) {
+
+		if ( queryParams ) {
+			this.queryParams = queryParams;
+		}
 
 		var offenders = [];
 
 		// Query each related condition record to return a list of offending records
 		offenders = this._getAndCheckConditions( standardSysID );
-
-		// gs.info( "Found " + offenders.length + " offenders" );
 
 		return offenders;
 
@@ -59,8 +61,6 @@ TeamStandards.prototype = {
 			}
 		}
 
-		// gs.info( "Found " + grCond.getRowCount() + " condition records on coding standard " + standardSysID );
-
 		return standardOffenders;
 
 	},
@@ -75,12 +75,13 @@ TeamStandards.prototype = {
 
 		var individualOffenders = [];
 		var scriptedEval = grCond.scripted.toString();
+		var query = this._calcQuery();
 
 		var grTable = new GlideRecord( grCond.table.toString() );
 		if ( scriptedEval == 'false' ) {
 			grTable.addEncodedQuery( grCond.condition.toString() );
 		}
-		grTable.addQuery( 'sys_updated_by', gs.getUserName() );
+		grTable.addQuery( query );
 		grTable.query();
 
 		while ( grTable.next() ) {
@@ -99,8 +100,8 @@ TeamStandards.prototype = {
 
 	/*_________________________________________________________________
     * Description: Create an object
-    * Parameters: grTable
-    * Returns:
+    * Parameters: grTable [GlideRecord] - a record on a pre-selected table
+    * Returns: [Object] - Generic properties required from the given GlideRecord
     ________________________________________________________________*/
 	_buildOffender: function( grTable ) {
 		return {
@@ -112,6 +113,50 @@ TeamStandards.prototype = {
 		};
 	},
 
+	/*_________________________________________________________________
+    * Description: Calculate a query based on input query parameters
+    * Parameters: n/a
+    * Returns: query [String] - encoded query string to use in the condition query
+    ________________________________________________________________*/
+	_calcQuery: function() {
+		// Don't bother continuing if there are no parameters given
+		if ( !this.queryParams ) {
+			return "";
+		}
+		var query = "";
+
+		// Switch on the query search type
+		switch( this.queryParams.searchType.value ) {
+			case 'user':
+				// Searching for a single users updates
+				query = "sys_updated_by=" + this.queryParams.user.value;
+				break;
+			case 'multipleUsers':
+				// Searching for multiple users updates input as a string separated list of user IDs
+				query = "sys_updated_byIN" + this.queryParams.users.value;
+				break;
+			case 'all':
+				query = "sys_updated_by!=admin^sys_updated_by!=maint^sys_updated_by!=glide.maint";
+				// Search on all users that are not OOB (this might get complicated, ignore admin and maint for now but there are others)
+				break;
+			default:
+				gs.error( "No searchType defined in the query parameters" );
+		}
+		
+		// Now we need to check if any date parameters have been used
+		// Date can be AFTER the start date && BEFORE the end date. Either may/may not exist
+		if ( this.queryParams.dateRange.startDate ) {
+			query += "^sys_updated_on>=" + this.queryParams.dateRange.startDate;
+		}
+		
+		if ( this.queryParams.dateRange.endDate ) {
+			query += "^sys_updated_on<=" + this.queryParams.dateRange.endDate;
+		}
+		
+		return query;
+		
+	},
+
 
 	type: 'TeamStandards'
 };]]></script>
@@ -119,13 +164,13 @@ TeamStandards.prototype = {
         <sys_created_by>admin_tc</sys_created_by>
         <sys_created_on>2018-12-14 17:20:32</sys_created_on>
         <sys_id>1285be724f926300dc5a417da310c7eb</sys_id>
-        <sys_mod_count>25</sys_mod_count>
+        <sys_mod_count>29</sys_mod_count>
         <sys_name>TeamStandards</sys_name>
         <sys_package display_value="TeamStandards" source="x_38339_teamstand">26a1f9a24f562300dc5a417da310c7f6</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="TeamStandards">26a1f9a24f562300dc5a417da310c7f6</sys_scope>
         <sys_update_name>sys_script_include_1285be724f926300dc5a417da310c7eb</sys_update_name>
         <sys_updated_by>admin_tc</sys_updated_by>
-        <sys_updated_on>2018-12-18 15:19:26</sys_updated_on>
+        <sys_updated_on>2018-12-21 16:38:16</sys_updated_on>
     </sys_script_include>
 </record_update>

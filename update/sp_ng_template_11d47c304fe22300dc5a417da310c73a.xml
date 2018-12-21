@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_ng_template">
+    <sp_ng_template action="INSERT_OR_UPDATE">
+        <id>team-standards-options-modal.html</id>
+        <sp_widget display_value="TeamStandards Config Header">8c85e1644fe2e300dc5a417da310c70b</sp_widget>
+        <sys_class_name>sp_ng_template</sys_class_name>
+        <sys_created_by>admin_tc</sys_created_by>
+        <sys_created_on>2018-12-20 12:59:41</sys_created_on>
+        <sys_id>11d47c304fe22300dc5a417da310c73a</sys_id>
+        <sys_mod_count>85</sys_mod_count>
+        <sys_name>team-standards-options-modal.html</sys_name>
+        <sys_package display_value="TeamStandards" source="x_38339_teamstand">26a1f9a24f562300dc5a417da310c7f6</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TeamStandards">26a1f9a24f562300dc5a417da310c7f6</sys_scope>
+        <sys_update_name>sp_ng_template_11d47c304fe22300dc5a417da310c73a</sys_update_name>
+        <sys_updated_by>admin_tc</sys_updated_by>
+        <sys_updated_on>2018-12-21 16:29:38</sys_updated_on>
+        <template><![CDATA[<div>
+
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title">${Options}</h3>
+  </div>
+
+  <div class="modal-body" id="modal-body">
+    <div style="margin: 10px;">
+      <label for="search-type">${Who are we checking coding standards against?}</label>
+      <select name="search-type" class="select-picker"
+              ng-model="m.returnData.searchType"
+              ng-options="option.display for option in m.searchTypeOptions track by option.value">
+      </select>
+    </div>
+
+    <div style="margin: 10px;"
+         ng-if="m.returnData.searchType.value == 'user'">
+      <sn-record-picker field="m.returnData.user" table="'sys_user'" display-field="'name'"
+                        display-fields="'user_name,email'" value-field="'user_name'"
+                        search-fields="'name,user_name,email'" placeholder="${Select a User}">
+      </sn-record-picker>
+    </div>
+    <div style="margin: 10px;"
+         ng-if="m.returnData.searchType.value == 'multipleUsers'">
+      <sn-record-picker field="m.returnData.users" table="'sys_user'" display-field="'name'"
+                        display-fields="'user_name,email'" value-field="'user_name'"
+                        search-fields="'name,user_name,email'" placeholder="${Select Users}"
+                        multiple="true">
+      </sn-record-picker>
+    </div>
+
+    <hr/>
+
+    <div style="margin: 10px;">
+      <label>
+        <input type="checkbox"
+               ng-model="m.useDateRange"
+               ng-checked="m.useDateRange">
+        &nbsp;&nbsp;
+        ${Use date range?}
+      </label>
+    </div>
+    <div class="row"
+         ng-show="m.useDateRange">
+      <!-- Start date -->
+      <div class="col-md-6">
+        <label>${Start Date}</label>
+        <p class="input-group">
+          <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" is-open="startDateOpen" close-text="Close"
+                 ng-model="m.returnData.dateRange.startDate"/>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" 
+                    ng-click="startDateOpen = true"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+      </div>
+      <!-- End date -->
+      <div class="col-md-6">
+        <label>${End Date}</label>
+        <p class="input-group">
+          <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" is-open="endDateOpen" close-text="Close"
+                 ng-model="m.returnData.dateRange.endDate"/>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default"
+                    ng-click="endDateOpen = true"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="m.cancel()">${Cancel}</button>
+    <button class="btn btn-primary" type="button" ng-click="m.ok()">${OK}</button>
+  </div>
+
+</div>]]></template>
+    </sp_ng_template>
+</record_update>

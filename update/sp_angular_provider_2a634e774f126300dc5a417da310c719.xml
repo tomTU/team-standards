@@ -2,38 +2,79 @@
     <sp_angular_provider action="INSERT_OR_UPDATE">
         <name>codingStandardService</name>
         <script><![CDATA[function codingStandardService() {
-	
+
 	var data = this.data = {
-		"standards": [],
-		"selectedIndex": ""
+		"standards": [], // Array of active standards, each standard will contain an array of offending records if there are any
+		"selectedIndex": "", // Currently selected index of the standards defined above
+		"display": "overview", // Defaults to overview on first page load
+		"searchParams": {} // Initialised in the config header widget
 	};
-	
+
+	// Method to update the Standards array
 	this.setStandards = function( newStandards ) {
 		data.standards = newStandards;
 	};
-	
+
+	// Method to update an array of offending records on a specified standards index
 	this.updateOffenders = function( index, newOffenders ) {
 		data.standards[ index ].offenders = newOffenders;
 		data.standards[ index ].loaded = true;
 	};
-	
+
+	// Method to update the selected Index, tells the Underview widget which rows to display
 	this.setSelectedIndex = function( index ) {
 		data.selectedIndex = index;
 	};
+
+	// Method to update the type of screen we are currently looking at
+	this.setSelectedDisplay = function( displayValue ) {
+		data.display = displayValue;
+	};
 	
+	// Method to update the search params for server side offending record calculations
+	this.setSearchParams = function( searchParams ) {
+		data.searchParams = searchParams;
+	};
+
+	// Method called to change the display, this needs calculating if the a tab is selected that relies on an index
+	this.changeDisplay = function( displayValue ) {
+		
+		// Take the display value and calculate acitons that need performing
+		switch( displayValue ) {
+			case 'overview':
+				this.setSelectedDisplay( 'overview' );
+				break;
+			case 'details':
+				// If there is no index set, then find the first instance where offending records exist
+				if ( data.selectedIndex == '' ) {
+					for ( var i = 0; i < data.standards.length; i++ ) {
+						if ( data.standards[i].offenders && data.standards[i].offenders.length > 0 ) {
+							this.setSelectedIndex( i );
+							break;
+						}
+					}
+				}
+				this.setSelectedDisplay( 'details' );
+				break;
+			default:
+				this.setSelectedDisplay( 'overview' );
+		}
+		
+	};
+
 }]]></script>
         <sys_class_name>sp_angular_provider</sys_class_name>
         <sys_created_by>admin_tc</sys_created_by>
         <sys_created_on>2018-12-17 16:14:27</sys_created_on>
         <sys_id>2a634e774f126300dc5a417da310c719</sys_id>
-        <sys_mod_count>14</sys_mod_count>
+        <sys_mod_count>26</sys_mod_count>
         <sys_name>codingStandardService</sys_name>
         <sys_package display_value="TeamStandards" source="x_38339_teamstand">26a1f9a24f562300dc5a417da310c7f6</sys_package>
         <sys_policy/>
         <sys_scope display_value="TeamStandards">26a1f9a24f562300dc5a417da310c7f6</sys_scope>
         <sys_update_name>sp_angular_provider_2a634e774f126300dc5a417da310c719</sys_update_name>
         <sys_updated_by>admin_tc</sys_updated_by>
-        <sys_updated_on>2018-12-18 13:08:36</sys_updated_on>
+        <sys_updated_on>2018-12-21 14:05:37</sys_updated_on>
         <type>service</type>
     </sp_angular_provider>
 </record_update>
